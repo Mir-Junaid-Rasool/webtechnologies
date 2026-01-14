@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Lists & Image Attributes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .lesson-number {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn.current {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .tag { color: #569cd6; }
+        .attribute { color: #9cdcfe; }
+        .value { color: #ce9178; }
+        .comment { color: #6a9955; }
+
+        .demo-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .demo-output {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid #667eea;
+            min-height: 80px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        button.action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        button.action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .list-example {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+            .nav-bar {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Lists & Image Attributes</h1>
+            <p>Module 1 - Session 3</p>
+            <div class="lesson-number">Lesson 3 | Duration: 2 Hours</div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-group">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="lesson2.html" class="nav-btn">⬅️ Previous: Text Effects</a>
+                <a href="lesson3.html" class="nav-btn current">📍 Current: Lists & Images</a>
+            </div>
+            <div class="nav-group">
+                <a href="lesson4.html" class="nav-btn">➡️ Next: Hyperlinks</a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📝 HTML Lists Overview</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                Lists are used to organize and structure information on web pages. HTML provides three types of lists, each serving different purposes.
+            </p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>1️⃣ Ordered Lists</h4>
+                    <p>Numbered lists for sequential items</p>
+                    <code>&lt;ol&gt;</code>
+                </div>
+                <div class="card">
+                    <h4>🔹 Unordered Lists</h4>
+                    <p>Bulleted lists for non-sequential items</p>
+                    <code>&lt;ul&gt;</code>
+                </div>
+                <div class="card">
+                    <h4>📖 Definition Lists</h4>
+                    <p>Terms and their definitions</p>
+                    <code>&lt;dl&gt;</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>1️⃣ Ordered Lists (OL)</h2>
+            <p>Ordered lists display items with numbers or letters. Perfect for steps, rankings, or sequential information.</p>
+
+            <h3>Basic Ordered List</h3>
+            <div class="demo-box">
+                <div class="code-block">
+<span class="tag">&lt;ol&gt;</span>
+    <span class="tag">&lt;li&gt;</span>First item<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Second item<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Third item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                </div>
+                <div class="demo-output">
+                    <ol>
+                        <li>First item</li>
+                        <li>Second item</li>
+                        <li>Third item</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h3>Ordered List Attributes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                        <th>Required?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>src</code></td>
+                        <td>Source/path to the image file</td>
+                        <td><code>src="photo.jpg"</code></td>
+                        <td>✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>alt</code></td>
+                        <td>Alternative text (for accessibility)</td>
+                        <td><code>alt="Description"</code></td>
+                        <td>✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>width</code></td>
+                        <td>Width in pixels or percentage</td>
+                        <td><code>width="300"</code></td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>height</code></td>
+                        <td>Height in pixels or percentage</td>
+                        <td><code>height="200"</code></td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>title</code></td>
+                        <td>Tooltip text on hover</td>
+                        <td><code>title="Hover text"</code></td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>border</code></td>
+                        <td>Border width (deprecated, use CSS)</td>
+                        <td><code>border="2"</code></td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>align</code></td>
+                        <td>Alignment (deprecated, use CSS)</td>
+                        <td><code>align="left"</code></td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>loading</code></td>
+                        <td>Lazy loading (HTML5)</td>
+                        <td><code>loading="lazy"</code></td>
+                        <td>❌ No</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Image Tag Examples</h3>
+            <div class="grid-2">
+                <div class="demo-box">
+                    <strong>Basic Image</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> 
+     <span class="attribute">alt</span>=<span class="value">"A beautiful sunset"</span><span class="tag">&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Image with Size</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> 
+     <span class="attribute">alt</span>=<span class="value">"Sunset"</span>
+     <span class="attribute">width</span>=<span class="value">"400"</span> 
+     <span class="attribute">height</span>=<span class="value">"300"</span><span class="tag">&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Image with Title</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> 
+     <span class="attribute">alt</span>=<span class="value">"Sunset"</span>
+     <span class="attribute">title</span>=<span class="value">"Hover to see this text"</span><span class="tag">&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Responsive Image (Percentage)</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> 
+     <span class="attribute">alt</span>=<span class="value">"Sunset"</span>
+     <span class="attribute">width</span>=<span class="value">"100%"</span><span class="tag">&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>⚠️ Important Best Practices:</strong><br><br>
+                <strong>1. Always use alt attribute:</strong> Essential for accessibility and SEO<br>
+                <strong>2. Specify width and height:</strong> Prevents page layout shift<br>
+                <strong>3. Use descriptive alt text:</strong> Describe what's in the image<br>
+                <strong>4. Optimize image size:</strong> Compress images before uploading<br>
+                <strong>5. Use correct formats:</strong> JPEG for photos, PNG for graphics/transparency, SVG for logos
+            </div>
+
+            <h3>Image Alignment (Using CSS Style)</h3>
+            <div class="demo-box">
+                <strong>Modern Way: Using CSS Style Attribute</strong>
+                <div class="code-block">
+<span class="comment">&lt;!-- Left Aligned --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Photo"</span> 
+     <span class="attribute">style</span>=<span class="value">"float: left; margin-right: 10px;"</span><span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- Right Aligned --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Photo"</span> 
+     <span class="attribute">style</span>=<span class="value">"float: right; margin-left: 10px;"</span><span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- Centered --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attribute">src</span>=<span class="value">"photo.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Photo"</span> 
+     <span class="attribute">style</span>=<span class="value">"display: block; margin: 0 auto;"</span><span class="tag">&gt;</span>
+                </div>
+            </div>
+
+            <h3>Visual Demonstration</h3>
+            <div class="demo-output">
+                <div class="image-placeholder" style="width: 200px; height: 150px; margin: 10px auto;">
+                    🖼️ Image Demo
+                </div>
+                <p style="text-align: center; color: #666; margin-top: 10px;">
+                    <strong>Placeholder for actual image</strong><br>
+                    In real usage, replace with actual image paths
+                </p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎮 Interactive Playground</h2>
+            <div class="interactive-demo">
+                <h3>Try Different Lists</h3>
+                <button class="action-btn" onclick="showOrderedDemo()">Ordered List Types</button>
+                <button class="action-btn" onclick="showUnorderedDemo()">Unordered List Types</button>
+                <button class="action-btn" onclick="showNestedDemo()">Nested Lists</button>
+                <button class="action-btn" onclick="showDefinitionDemo()">Definition List</button>
+                <button class="action-btn" onclick="clearPlayground()">Clear</button>
+
+                <div class="demo-output" id="playground">
+                    <p style="text-align: center; color: #999;">Click buttons above to see different list examples!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📝 Practice Exercises</h2>
+            
+            <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #333;">Exercise 1: Create a Recipe Page</h3>
+                <p>Build an HTML page for your favorite recipe with:</p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Ordered list for step-by-step instructions</li>
+                    <li>Unordered list for ingredients</li>
+                    <li>Definition list for cooking terms/techniques</li>
+                    <li>At least one image of the dish</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #333;">Exercise 2: Course Syllabus Page</h3>
+                <p>Create a syllabus page for any subject with:</p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Ordered list of modules (1, 2, 3...)</li>
+                    <li>Nested unordered lists for topics under each module</li>
+                    <li>Definition list for key terms</li>
+                    <li>Images for visual aids (charts, diagrams)</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #333;">Exercise 3: Product Catalog</h3>
+                <p>Design a simple product catalog with:</p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>3-5 product images with proper attributes</li>
+                    <li>Unordered list of features for each product</li>
+                    <li>Definition list for specifications</li>
+                    <li>Use different image sizes and alignments</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="margin-top: 0; color: #333;">Challenge: FAQ Page with Images</h3>
+                <p>Create a Frequently Asked Questions page:</p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Use definition lists for Q&A pairs</li>
+                    <li>Nested lists for multi-part answers</li>
+                    <li>Add relevant images with proper alt text</li>
+                    <li>Use different list types (OL, UL, DL) appropriately</li>
+                    <li>Include at least one nested list (3 levels deep)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📚 Quick Reference</h2>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Ordered List</h4>
+                    <code>&lt;ol&gt;<br>&nbsp;&nbsp;&lt;li&gt;Item&lt;/li&gt;<br>&lt;/ol&gt;</code>
+                    <p style="margin-top: 10px;">Types: 1, A, a, I, i</p>
+                </div>
+
+                <div class="card">
+                    <h4>Unordered List</h4>
+                    <code>&lt;ul&gt;<br>&nbsp;&nbsp;&lt;li&gt;Item&lt;/li&gt;<br>&lt;/ul&gt;</code>
+                    <p style="margin-top: 10px;">Types: disc, circle, square</p>
+                </div>
+
+                <div class="card">
+                    <h4>Definition List</h4>
+                    <code>&lt;dl&gt;<br>&nbsp;&nbsp;&lt;dt&gt;Term&lt;/dt&gt;<br>&nbsp;&nbsp;&lt;dd&gt;Def&lt;/dd&gt;<br>&lt;/dl&gt;</code>
+                </div>
+
+                <div class="card">
+                    <h4>Basic Image</h4>
+                    <code>&lt;img src="..." alt="..."&gt;</code>
+                    <p style="margin-top: 10px;">src and alt are required</p>
+                </div>
+
+                <div class="card">
+                    <h4>Image with Size</h4>
+                    <code>&lt;img src="..." alt="..." width="300" height="200"&gt;</code>
+                </div>
+
+                <div class="card">
+                    <h4>Responsive Image</h4>
+                    <code>&lt;img src="..." alt="..." width="100%"&gt;</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 Key Takeaways</h2>
+            <div class="info-box">
+                <strong>Lists:</strong><br>
+                ✅ Use OL when order matters (steps, rankings)<br>
+                ✅ Use UL when order doesn't matter (features, items)<br>
+                ✅ Use DL for term-definition pairs (glossary, FAQ)<br>
+                ✅ Lists can be nested for hierarchical structures<br><br>
+                
+                <strong>Images:</strong><br>
+                ✅ Always include src and alt attributes<br>
+                ✅ alt text improves accessibility and SEO<br>
+                ✅ Specify width/height to prevent layout shift<br>
+                ✅ Use CSS for modern styling instead of deprecated HTML attributes<br>
+                ✅ Optimize image file sizes for faster loading
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-group">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="lesson2.html" class="nav-btn">⬅️ Previous: Text Effects</a>
+            </div>
+            <div class="nav-group">
+                <a href="lesson4.html" class="nav-btn">➡️ Next: Hyperlinks & URLs</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showOrderedDemo() {
+            document.getElementById('playground').innerHTML = `
+                <h3>Ordered List Examples</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4>Type: 1 (Numbers)</h4>
+                        <ol type="1">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Type: A (Uppercase)</h4>
+                        <ol type="A">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Type: a (Lowercase)</h4>
+                        <ol type="a">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Type: I (Roman Upper)</h4>
+                        <ol type="I">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Type: i (Roman Lower)</h4>
+                        <ol type="i">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Start at 5</h4>
+                        <ol start="5">
+                            <li>Fifth</li>
+                            <li>Sixth</li>
+                            <li>Seventh</li>
+                        </ol>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showUnorderedDemo() {
+            document.getElementById('playground').innerHTML = `
+                <h3>Unordered List Examples</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4>Type: disc (default)</h4>
+                        <ul type="disc">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Type: circle</h4>
+                        <ul type="circle">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Type: square</h4>
+                        <ul type="square">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>No bullets</h4>
+                        <ul style="list-style-type: none;">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showNestedDemo() {
+            document.getElementById('playground').innerHTML = `
+                <h3>Nested List Examples</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4>Nested Ordered Lists</h4>
+                        <ol>
+                            <li>Module 1: HTML
+                                <ol type="a">
+                                    <li>Introduction</li>
+                                    <li>Tags & Attributes</li>
+                                    <li>Lists & Images</li>
+                                </ol>
+                            </li>
+                            <li>Module 2: CSS
+                                <ol type="a">
+                                    <li>Selectors</li>
+                                    <li>Properties</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Nested Unordered Lists</h4>
+                        <ul>
+                            <li>Front-End
+                                <ul>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                </ul>
+                            </li>
+                            <li>Back-End
+                                <ul>
+                                    <li>PHP</li>
+                                    <li>MySQL</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Mixed Lists (OL + UL)</h4>
+                        <ol>
+                            <li>Shopping List
+                                <ul>
+                                    <li>Milk</li>
+                                    <li>Bread</li>
+                                    <li>Eggs</li>
+                                </ul>
+                            </li>
+                            <li>To-Do List
+                                <ul>
+                                    <li>Study HTML</li>
+                                    <li>Complete assignment</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showDefinitionDemo() {
+            document.getElementById('playground').innerHTML = `
+                <h3>Definition List Examples</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <h4>Web Technologies Glossary</h4>
+                    <dl style="line-height: 2;">
+                        <dt><strong>HTML</strong></dt>
+                        <dd>HyperText Markup Language - The standard markup language for creating web pages and web applications.</dd>
+                        
+                        <dt><strong>CSS</strong></dt>
+                        <dd>Cascading Style Sheets - A style sheet language used for describing the presentation of a document written in HTML.</dd>
+                        
+                        <dt><strong>JavaScript</strong></dt>
+                        <dd>A high-level, interpreted programming language that conforms to the ECMAScript specification. It enables interactive web pages.</dd>
+                        
+                        <dt><strong>PHP</strong></dt>
+                        <dd>Hypertext Preprocessor - A popular general-purpose scripting language especially suited to web development.</dd>
+                        
+                        <dt><strong>Responsive Design</strong></dt>
+                        <dd>An approach to web design that makes web pages render well on a variety of devices and window or screen sizes.</dd>
+                    </dl>
+                </div>
+            `;
+        }
+
+        function clearPlayground() {
+            document.getElementById('playground').innerHTML = '<p style="text-align: center; color: #999;">Click buttons above to see different list examples!</p>';
+        }
+    </script>
+</body>
+</html>
+                        <th>Attribute</th>
+                        <th>Values</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>type</code></td>
+                        <td>1, A, a, I, i</td>
+                        <td>Numbering style</td>
+                    </tr>
+                    <tr>
+                        <td><code>start</code></td>
+                        <td>number</td>
+                        <td>Starting number</td>
+                    </tr>
+                    <tr>
+                        <td><code>reversed</code></td>
+                        <td>reversed</td>
+                        <td>Reverse order</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Different Numbering Styles</h3>
+            <div class="grid-2">
+                <div class="demo-box">
+                    <strong>Type: Numbers (default)</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ol</span> <span class="attribute">type</span>=<span class="value">"1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol type="1">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: Uppercase Letters</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ol</span> <span class="attribute">type</span>=<span class="value">"A"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol type="A">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: Lowercase Letters</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ol</span> <span class="attribute">type</span>=<span class="value">"a"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol type="a">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: Roman Numerals (Upper)</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ol</span> <span class="attribute">type</span>=<span class="value">"I"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol type="I">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: Roman Numerals (Lower)</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ol</span> <span class="attribute">type</span>=<span class="value">"i"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol type="i">
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Start from Different Number</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ol</span> <span class="attribute">start</span>=<span class="value">"5"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol start="5">
+                            <li>Fifth</li>
+                            <li>Sixth</li>
+                            <li>Seventh</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 When to Use Ordered Lists:</strong><br>
+                • Step-by-step instructions<br>
+                • Rankings or top lists<br>
+                • Sequential processes<br>
+                • Numbered references<br>
+                • Any list where order matters
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🔹 Unordered Lists (UL)</h2>
+            <p>Unordered lists display items with bullets. Perfect for lists where order doesn't matter.</p>
+
+            <h3>Basic Unordered List</h3>
+            <div class="demo-box">
+                <div class="code-block">
+<span class="tag">&lt;ul&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item one<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item two<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item three<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                </div>
+                <div class="demo-output">
+                    <ul>
+                        <li>Item one</li>
+                        <li>Item two</li>
+                        <li>Item three</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Different Bullet Styles</h3>
+            <div class="grid-2">
+                <div class="demo-box">
+                    <strong>Type: Disc (default)</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ul</span> <span class="attribute">type</span>=<span class="value">"disc"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ul type="disc">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: Circle</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ul</span> <span class="attribute">type</span>=<span class="value">"circle"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ul type="circle">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: Square</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ul</span> <span class="attribute">type</span>=<span class="value">"square"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ul type="square">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Type: None (No bullets)</strong>
+                    <div class="code-block" style="font-size: 0.9em;">
+<span class="tag">&lt;ul</span> <span class="attribute">style</span>=<span class="value">"list-style-type: none;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Item<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ul style="list-style-type: none;">
+                            <li>Apple</li>
+                            <li>Banana</li>
+                            <li>Orange</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 When to Use Unordered Lists:</strong><br>
+                • Shopping lists<br>
+                • Features or benefits<br>
+                • Navigation menus<br>
+                • Any items without specific order<br>
+                • Collection of related items
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🔄 Nested Lists</h2>
+            <p>Lists can be nested inside other lists to create hierarchical structures.</p>
+
+            <div class="grid-2">
+                <div class="demo-box">
+                    <strong>Nested Ordered List</strong>
+                    <div class="code-block" style="font-size: 0.85em;">
+<span class="tag">&lt;ol&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Main Topic 1
+        <span class="tag">&lt;ol</span> <span class="attribute">type</span>=<span class="value">"a"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;li&gt;</span>Subtopic 1.1<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;li&gt;</span>Subtopic 1.2<span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;/ol&gt;</span>
+    <span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Main Topic 2<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ol>
+                            <li>Main Topic 1
+                                <ol type="a">
+                                    <li>Subtopic 1.1</li>
+                                    <li>Subtopic 1.2</li>
+                                </ol>
+                            </li>
+                            <li>Main Topic 2</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <strong>Nested Unordered List</strong>
+                    <div class="code-block" style="font-size: 0.85em;">
+<span class="tag">&lt;ul&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Fruits
+        <span class="tag">&lt;ul&gt;</span>
+            <span class="tag">&lt;li&gt;</span>Apple<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;li&gt;</span>Banana<span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;/ul&gt;</span>
+    <span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Vegetables<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                    </div>
+                    <div class="list-example">
+                        <ul>
+                            <li>Fruits
+                                <ul>
+                                    <li>Apple</li>
+                                    <li>Banana</li>
+                                </ul>
+                            </li>
+                            <li>Vegetables</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <strong>Mixed Nested Lists (OL + UL)</strong>
+                <div class="code-block" style="font-size: 0.85em;">
+<span class="tag">&lt;ol&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Web Technologies Course
+        <span class="tag">&lt;ul&gt;</span>
+            <span class="tag">&lt;li&gt;</span>HTML<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;li&gt;</span>CSS<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;li&gt;</span>JavaScript<span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;/ul&gt;</span>
+    <span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Database Course
+        <span class="tag">&lt;ul&gt;</span>
+            <span class="tag">&lt;li&gt;</span>SQL<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;li&gt;</span>NoSQL<span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;/ul&gt;</span>
+    <span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                </div>
+                <div class="list-example">
+                    <ol>
+                        <li>Web Technologies Course
+                            <ul>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                            </ul>
+                        </li>
+                        <li>Database Course
+                            <ul>
+                                <li>SQL</li>
+                                <li>NoSQL</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📖 Definition Lists (DL)</h2>
+            <p>Definition lists are perfect for glossaries, FAQs, or any term-definition pairs.</p>
+
+            <h3>Definition List Structure</h3>
+            <div class="info-box">
+                <strong>Three Tags Work Together:</strong><br><br>
+                • <code>&lt;dl&gt;</code> - Definition List (container)<br>
+                • <code>&lt;dt&gt;</code> - Definition Term (the word/term)<br>
+                • <code>&lt;dd&gt;</code> - Definition Description (the meaning)
+            </div>
+
+            <div class="demo-box">
+                <div class="code-block">
+<span class="tag">&lt;dl&gt;</span>
+    <span class="tag">&lt;dt&gt;</span>HTML<span class="tag">&lt;/dt&gt;</span>
+    <span class="tag">&lt;dd&gt;</span>HyperText Markup Language - the standard language for creating web pages<span class="tag">&lt;/dd&gt;</span>
+    
+    <span class="tag">&lt;dt&gt;</span>CSS<span class="tag">&lt;/dt&gt;</span>
+    <span class="tag">&lt;dd&gt;</span>Cascading Style Sheets - used for styling web pages<span class="tag">&lt;/dd&gt;</span>
+    
+    <span class="tag">&lt;dt&gt;</span>JavaScript<span class="tag">&lt;/dt&gt;</span>
+    <span class="tag">&lt;dd&gt;</span>A programming language for adding interactivity to web pages<span class="tag">&lt;/dd&gt;</span>
+<span class="tag">&lt;/dl&gt;</span>
+                </div>
+                <div class="demo-output">
+                    <dl>
+                        <dt><strong>HTML</strong></dt>
+                        <dd>HyperText Markup Language - the standard language for creating web pages</dd>
+                        
+                        <dt><strong>CSS</strong></dt>
+                        <dd>Cascading Style Sheets - used for styling web pages</dd>
+                        
+                        <dt><strong>JavaScript</strong></dt>
+                        <dd>A programming language for adding interactivity to web pages</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 When to Use Definition Lists:</strong><br>
+                • Glossaries and dictionaries<br>
+                • FAQ sections<br>
+                • Metadata and specifications<br>
+                • Term-definition pairs<br>
+                • Product descriptions
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🖼️ Image Tag Attributes</h2>
+            <p>The <code>&lt;img&gt;</code> tag has many attributes to control how images are displayed.</p>
+
+            <h3>Essential Image Attributes</h3>
+            <table>
+                <thead>
+                    <tr>

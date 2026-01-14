@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Downloads | Web Technologies</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    .header h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .downloads-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .file-card {
+      background: linear-gradient(135deg, #f5f7ff, #eef1ff);
+      padding: 25px;
+      border-radius: 15px;
+      transition: 0.3s ease;
+      border-left: 6px solid #667eea;
+    }
+
+    .file-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .file-card h3 {
+      margin: 0;
+      color: #667eea;
+    }
+
+    .file-card p {
+      color: #555;
+      margin: 10px 0 15px;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(102,126,234,0.5);
+    }
+
+    nav {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lesson2.html">Lesson 2</a></li>
+      <li><a href="lesson3.html">Lesson 3</a></li>
+      <li><a href="downloads.html">Downloads</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>📥 Class Downloads</h1>
+      <p>Download HTML practice exercises and assignments</p>
+    </div>
+
+    <div class="downloads-card">
+      <h2 style="color:#667eea;">Available Exercises</h2>
+
+      <div class="grid">
+
+        <div class="file-card">
+          <h3>📄 Exercise 1</h3>
+          <p>Basic HTML structure</p>
+          <a class="download-btn" href="downloads/tagsstartinghtml.html" download>Download</a>
+        </div>
+
+        <div class="file-card">
+          <h3>📄 Exercise 2</h3>
+          <p>Text formatting and headings</p>
+          <a class="download-btn" href="downloads/jan12profile.html" download>Download</a>
+        </div>
+
+        <div class="file-card">
+          <h3>📄 Tables Task</h3>
+          <p>colspan & rowspan practice</p>
+          <a class="download-btn" href="downloads/jan13listsandtables.html" download>Download</a>
+        </div>
+
+        <div class="file-card">
+          <h3>📄 Forms Task</h3>
+          <p>Input elements & forms</p>
+          <a class="download-btn" href="downloads/forms.html" download>Download</a>
+        </div>
+
+        <div class="file-card">
+          <h3>📦 All Exercises</h3>
+          <p>Download everything in one ZIP</p>
+          <a class="download-btn" href="downloads/all-exercises.zip" download>Download ZIP</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
