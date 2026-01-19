@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Styled Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            width: 380px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        fieldset {
+            border: 2px solid rebeccapurple;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: bold;
+            color: rebeccapurple;
+            font-size: 18px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="password"],
+        input[type="email"],
+        input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 2px solid #ccc;
+            margin-top: 4px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: rebeccapurple;
+            outline: none;
+        }
+
+        .inline {
+            margin-top: 8px;
+        }
+
+        .inline input {
+            margin-right: 5px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            background: rebeccapurple;
+            color: white;
+        }
+
+        input[type="reset"] {
+            background: #ddd;
+        }
+
+        input[type="submit"]:hover {
+            background: #5a2d91;
+        }
+
+        input[type="reset"]:hover {
+            background: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form>
+        <fieldset>
+            <legend>User Registration Form</legend>
+
+            <label>Name
+                <input type="text" placeholder="Enter your name" required>
+            </label>
+
+            <label>Age
+                <input type="number" placeholder="Enter your age">
+            </label>
+
+            <label>Interest Level
+                <input type="range">
+            </label>
+
+            <label>Password
+                <input type="password" placeholder="Enter password">
+            </label>
+
+            <label>Email
+                <input type="email" placeholder="Enter email">
+            </label>
+
+            <label>Gender</label>
+            <div class="inline">
+                <input type="radio" name="gender"> Male
+                <input type="radio" name="gender"> Female
+            </div>
+
+            <label>Hobbies</label>
+            <div class="inline">
+                <input type="checkbox"> Playing
+                <input type="checkbox"> Gaming
+                <input type="checkbox"> Gardening
+                <input type="checkbox"> Coding
+            </div>
+
+            <div class="buttons">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
