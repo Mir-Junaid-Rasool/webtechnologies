@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selectors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .lesson-badge {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.current {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #11998e;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #11998e;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #38ef7d;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .css-selector { color: #d7ba7d; }
+        .css-property { color: #9cdcfe; }
+        .css-value { color: #ce9178; }
+        .comment { color: #6a9955; }
+
+        .demo-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #11998e;
+        }
+
+        .demo-output {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid #11998e;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #11998e;
+        }
+
+        .selector-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .selector-table th,
+        .selector-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .selector-table th {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .selector-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        button.action-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        button.action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 CSS Selectors</h1>
+            <p>Module 2 - Lesson 1</p>
+            <div class="lesson-badge">Targeting HTML Elements</div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-group">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="lesson7.html" class="nav-btn">⬅️ CSS Introduction</a>
+                <a href="lesson8.html" class="nav-btn current">📍 Selectors</a>
+            </div>
+            <div class="nav-group">
+                <a href="lesson9.html" class="nav-btn">➡️ Next: Colors & Backgrounds</a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 What are CSS Selectors?</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                Selectors are patterns used to select the HTML elements you want to style. 
+                They tell the browser which elements should be affected by the CSS rules.
+            </p>
+
+            <div class="info-box">
+                <strong>💡 Think of selectors as:</strong><br>
+                A way to "point at" or "target" specific elements on your webpage. 
+                Just like using a pointer to highlight specific items in a list!
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📋 Types of CSS Selectors</h2>
+
+            <table class="selector-table">
+                <thead>
+                    <tr>
+                        <th>Selector Type</th>
+                        <th>Syntax</th>
+                        <th>Example</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Universal</strong></td>
+                        <td><code>*</code></td>
+                        <td><code>* { }</code></td>
+                        <td>Selects all elements</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Element/Type</strong></td>
+                        <td><code>element</code></td>
+                        <td><code>p { }</code></td>
+                        <td>Selects all elements of that type</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Class</strong></td>
+                        <td><code>.classname</code></td>
+                        <td><code>.box { }</code></td>
+                        <td>Selects elements with that class</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ID</strong></td>
+                        <td><code>#idname</code></td>
+                        <td><code>#header { }</code></td>
+                        <td>Selects element with that ID</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Descendant</strong></td>
+                        <td><code>parent child</code></td>
+                        <td><code>div p { }</code></td>
+                        <td>Selects children inside parent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Child</strong></td>
+                        <td><code>parent > child</code></td>
+                        <td><code>div > p { }</code></td>
+                        <td>Selects direct children only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grouping</strong></td>
+                        <td><code>sel1, sel2</code></td>
+                        <td><code>h1, h2 { }</code></td>
+                        <td>Applies same style to multiple</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-card">
+            <h3>1️⃣ Universal Selector (*)</h3>
+            <div class="demo-box">
+                <p>Targets ALL elements on the page.</p>
+                <div class="code-block">
+<span class="css-selector">*</span> {
+    <span class="css-property">margin</span>: <span class="css-value">0</span>;
+    <span class="css-property">padding</span>: <span class="css-value">0</span>;
+    <span class="css-property">box-sizing</span>: <span class="css-value">border-box</span>;
+}
+                </div>
+                <div class="info-box">
+                    <strong>Use case:</strong> Often used for CSS resets to remove default browser styling
+                </div>
+            </div>
+
+            <h3>2️⃣ Element Selector</h3>
+            <div class="demo-box">
+                <p>Targets all elements of a specific type.</p>
+                <div class="code-block">
+<span class="css-selector">p</span> {
+    <span class="css-property">color</span>: <span class="css-value">blue</span>;
+    <span class="css-property">font-size</span>: <span class="css-value">16px</span>;
+}
+
+<span class="css-selector">h1</span> {
+    <span class="css-property">color</span>: <span class="css-value">green</span>;
+    <span class="css-property">text-align</span>: <span class="css-value">center</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <h1 style="color: green; text-align: center;">This is an H1</h1>
+                    <p style="color: blue; font-size: 16px;">This is a paragraph styled by element selector.</p>
+                </div>
+            </div>
+
+            <h3>3️⃣ Class Selector (.)</h3>
+            <div class="demo-box">
+                <p>Targets elements with a specific class attribute. Most commonly used!</p>
+                <div class="code-block">
+<span class="comment">/* CSS */</span>
+<span class="css-selector">.highlight</span> {
+    <span class="css-property">background-color</span>: <span class="css-value">yellow</span>;
+    <span class="css-property">padding</span>: <span class="css-value">10px</span>;
+}
+
+<span class="comment">&lt;!-- HTML --&gt;</span>
+&lt;p class="highlight"&gt;This paragraph is highlighted&lt;/p&gt;
+                </div>
+                <div class="demo-output">
+                    <p style="background-color: yellow; padding: 10px;">This paragraph is highlighted</p>
+                    <p style="margin-top: 10px;">This paragraph is not highlighted</p>
+                </div>
+                <div class="info-box" style="margin-top: 15px;">
+                    <strong>💡 Important:</strong><br>
+                    • Classes can be reused on multiple elements<br>
+                    • One element can have multiple classes: <code>class="box red large"</code><br>
+                    • Use descriptive class names
+                </div>
+            </div>
+
+            <h3>4️⃣ ID Selector (#)</h3>
+            <div class="demo-box">
+                <p>Targets a single element with a specific ID attribute.</p>
+                <div class="code-block">
+<span class="comment">/* CSS */</span>
+<span class="css-selector">#header</span> {
+    <span class="css-property">background-color</span>: <span class="css-value">#11998e</span>;
+    <span class="css-property">color</span>: <span class="css-value">white</span>;
+    <span class="css-property">padding</span>: <span class="css-value">20px</span>;
+}
+
+<span class="comment">&lt;!-- HTML --&gt;</span>
+&lt;div id="header"&gt;Website Header&lt;/div&gt;
+                </div>
+                <div class="demo-output">
+                    <div style="background-color: #11998e; color: white; padding: 20px; border-radius: 8px;">Website Header</div>
+                </div>
+                <div class="info-box" style="margin-top: 15px;">
+                    <strong>⚠️ Important Rules:</strong><br>
+                    • IDs must be unique (only one element with that ID per page)<br>
+                    • IDs have higher specificity than classes<br>
+                    • Use classes for styling, IDs for JavaScript/anchors
+                </div>
+            </div>
+
+            <h3>5️⃣ Descendant Selector (space)</h3>
+            <div class="demo-box">
+                <p>Targets elements inside other elements (at any level).</p>
+                <div class="code-block">
+<span class="comment">/* Selects all p elements inside div */</span>
+<span class="css-selector">div p</span> {
+    <span class="css-property">color</span>: <span class="css-value">red</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="border: 2px dashed #11998e; padding: 15px; border-radius: 8px;">
+                        <p style="color: red;">This paragraph is inside a div (styled)</p>
+                        <div style="margin: 10px 0; padding: 10px; background: #f0f0f0;">
+                            <p style="color: red;">This nested paragraph is also inside the div (styled)</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px;">This paragraph is outside (not styled)</p>
+                </div>
+            </div>
+
+            <h3>6️⃣ Child Selector (>)</h3>
+            <div class="demo-box">
+                <p>Targets only direct children (not nested descendants).</p>
+                <div class="code-block">
+<span class="comment">/* Selects only direct p children of div */</span>
+<span class="css-selector">div > p</span> {
+    <span class="css-property">color</span>: <span class="css-value">purple</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="border: 2px dashed #11998e; padding: 15px; border-radius: 8px;">
+                        <p style="color: purple;">Direct child paragraph (styled)</p>
+                        <div style="margin: 10px 0; padding: 10px; background: #f0f0f0;">
+                            <p style="color: black;">Nested paragraph inside another div (not styled)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>7️⃣ Grouping Selector (,)</h3>
+            <div class="demo-box">
+                <p>Apply the same styles to multiple selectors.</p>
+                <div class="code-block">
+<span class="comment">/* Apply same style to h1, h2, and h3 */</span>
+<span class="css-selector">h1, h2, h3</span> {
+    <span class="css-property">color</span>: <span class="css-value">#11998e</span>;
+    <span class="css-property">font-family</span>: <span class="css-value">Arial, sans-serif</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <h1 style="color: #11998e; font-family: Arial, sans-serif;">Heading 1</h1>
+                    <h2 style="color: #11998e; font-family: Arial, sans-serif;">Heading 2</h2>
+                    <h3 style="color: #11998e; font-family: Arial, sans-serif;">Heading 3</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎮 Interactive Selector Demo</h2>
+            <div class="interactive-demo">
+                <h3>Try Different Selectors</h3>
+                <button class="action-btn" onclick="demoElement()">Element Selector</button>
+                <button class="action-btn" onclick="demoClass()">Class Selector</button>
+                <button class="action-btn" onclick="demoId()">ID Selector</button>
+                <button class="action-btn" onclick="demoDescendant()">Descendant Selector</button>
+                <button class="action-btn" onclick="clearDemo()">Reset</button>
+
+                <div class="demo-output" id="playground" style="margin-top: 20px;">
+                    <p style="margin: 10px 0;">Click buttons above to see selector examples in action!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 Key Takeaways</h2>
+            <div class="info-box">
+                ✅ Selectors target HTML elements for styling<br>
+                ✅ Use <strong>classes</strong> for reusable styles (most common)<br>
+                ✅ Use <strong>IDs</strong> for unique elements (use sparingly for styling)<br>
+                ✅ <strong>Element selectors</strong> style all elements of that type<br>
+                ✅ <strong>Descendant selectors</strong> (space) target nested elements<br>
+                ✅ <strong>Child selectors</strong> (>) target direct children only<br>
+                ✅ <strong>Grouping</strong> (comma) applies same style to multiple selectors<br>
+                ✅ <strong>Universal selector</strong> (*) targets everything
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-group">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="lesson7.html" class="nav-btn">⬅️ CSS Introduction</a>
+            </div>
+            <div class="nav-group">
+                <a href="lesson9.html" class="nav-btn">➡️ Next: Colors & Backgrounds</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function demoElement() {
+            document.getElementById('playground').innerHTML = `
+                <h4>Element Selector Example</h4>
+                <div class="code-block" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+p { color: blue; }
+                </div>
+                <div style="border: 2px solid #11998e; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p style="color: blue; margin: 5px 0;">All paragraphs are blue!</p>
+                    <p style="color: blue; margin: 5px 0;">This paragraph too!</p>
+                    <p style="color: blue; margin: 5px 0;">And this one as well!</p>
+                </div>
+            `;
+        }
+
+        function demoClass() {
+            document.getElementById('playground').innerHTML = `
+                <h4>Class Selector Example</h4>
+                <div class="code-block" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+.special { background: yellow; padding: 10px; }
+                </div>
+                <div style="border: 2px solid #11998e; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p style="background: yellow; padding: 10px; margin: 5px 0;">This has class="special"</p>
+                    <p style="margin: 5px 0;">This paragraph has no class</p>
+                    <p style="background: yellow; padding: 10px; margin: 5px 0;">This also has class="special"</p>
+                </div>
+            `;
+        }
+
+        function demoId() {
+            document.getElementById('playground').innerHTML = `
+                <h4>ID Selector Example</h4>
+                <div class="code-block" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+#unique { border: 3px solid red; padding: 15px; }
+                </div>
+                <div style="border: 2px solid #11998e; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <div style="border: 3px solid red; padding: 15px; background: #ffe0e0; margin: 10px 0;">
+                        This element has id="unique"
+                    </div>
+                    <div style="padding: 15px; background: #f0f0f0; margin: 10px 0;">
+                        This element has no ID
+                    </div>
+                </div>
+            `;
+        }
+
+        function demoDescendant() {
+            document.getElementById('playground').innerHTML = `
+                <h4>Descendant Selector Example</h4>
+                <div class="code-block" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: monospace;">
+div p { color: green; font-weight: bold; }
+                </div>
+                <div style="border: 2px solid #11998e; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <div style="background: #f0f0f0; padding: 15px; border-radius: 5px;">
+                        <p style="color: green; font-weight: bold; margin: 5px 0;">Paragraph inside div (styled)</p>
+                        <p style="color: green; font-weight: bold; margin: 5px 0;">Another paragraph inside (styled)</p>
+                    </div>
+                    <p style="margin: 15px 0;">Paragraph outside div (not styled)</p>
+                </div>
+            `;
+        }
+
+        function clearDemo() {
+            document.getElementById('playground').innerHTML = '<p style="margin: 10px 0;">Click buttons above to see selector examples in action!</p>';
+        }
+    </script>
+</body>
+</html>
