@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: Display & Positioning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .lesson-badge {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+
+        .nav-btn.current {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #11998e;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #11998e;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #38ef7d;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+
+        .css-selector { color: #d7ba7d; }
+        .css-property { color: #9cdcfe; }
+        .css-value { color: #ce9178; }
+        .comment { color: #6a9955; }
+
+        .demo-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #11998e;
+        }
+
+        .demo-output {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid #11998e;
+            min-height: 100px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #11998e;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #fbc02d;
+        }
+
+        .property-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .property-table th,
+        .property-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .property-table th {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .property-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        button.action-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        button.action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+
+        .display-demo-box {
+            padding: 15px;
+            margin: 10px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 Display & Positioning</h1>
+            <p>Module 2 - Layout Control</p>
+            <div class="lesson-badge">Lesson 11 | Layout Fundamentals</div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-group">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="lesson10.html" class="nav-btn">⬅️ Previous: Box Model</a>
+                <a href="lesson11.html" class="nav-btn current">📍 Current: Display & Positioning</a>
+            </div>
+            <div class="nav-group">
+                <a href="lesson12.html" class="nav-btn">➡️ Next: Flexbox</a>
+            </div>
+        </div>
+
+        <!-- DISPLAY PROPERTY SECTION -->
+        <div class="content-card">
+            <h2>📊 The Display Property</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                The <code>display</code> property controls how an element is displayed and how it behaves in the layout. 
+                It's one of the most important CSS properties for controlling page layout.
+            </p>
+
+            <table class="property-table">
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Behavior</th>
+                        <th>Default For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>block</code></td>
+                        <td>Takes full width, starts on new line</td>
+                        <td>div, p, h1-h6, section</td>
+                    </tr>
+                    <tr>
+                        <td><code>inline</code></td>
+                        <td>Takes only needed width, stays in line</td>
+                        <td>span, a, strong, em</td>
+                    </tr>
+                    <tr>
+                        <td><code>inline-block</code></td>
+                        <td>Inline but respects width/height</td>
+                        <td>img, button</td>
+                    </tr>
+                    <tr>
+                        <td><code>none</code></td>
+                        <td>Default - no float</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="demo-box">
+                <strong>Float Example (Text wrapping around image):</strong>
+                <div class="code-block">
+<span class="css-selector">img</span> {
+    <span class="css-property">float</span>: <span class="css-value">left</span>;
+    <span class="css-property">margin</span>: <span class="css-value">0 20px 20px 0</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="float: left; width: 120px; height: 120px; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 20px 20px 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Image
+                    </div>
+                    <p style="text-align: justify; line-height: 1.8;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. This text wraps around the floated element. 
+                        The float property removes the element from normal flow and allows other content to wrap around it. 
+                        This is particularly useful for magazine-style layouts where text flows around images. 
+                        However, for modern layouts, Flexbox and Grid are preferred over floats.
+                    </p>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <strong>Clear Property:</strong>
+                <p style="margin-bottom: 15px;">The <code>clear</code> property prevents elements from wrapping around floats.</p>
+                <div class="code-block">
+<span class="css-selector">.clear-both</span> {
+    <span class="css-property">clear</span>: <span class="css-value">both</span>;  <span class="comment">/* Clears both left and right floats */</span>
+}
+                </div>
+                <table class="property-table">
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>left</code></td>
+                            <td>No floating elements on left</td>
+                        </tr>
+                        <tr>
+                            <td><code>right</code></td>
+                            <td>No floating elements on right</td>
+                        </tr>
+                        <tr>
+                            <td><code>both</code></td>
+                            <td>No floating elements on either side</td>
+                        </tr>
+                        <tr>
+                            <td><code>none</code></td>
+                            <td>Default - allows floating elements</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <strong>💡 Modern Approach:</strong><br>
+                For layouts, use <strong>Flexbox</strong> or <strong>Grid</strong> instead of floats. 
+                Floats are now mainly used for their original purpose: wrapping text around images.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎮 Interactive Demo</h2>
+            <div class="interactive-demo">
+                <h3>Explore Display & Position</h3>
+                <button class="action-btn" onclick="demoDisplay()">Display Types</button>
+                <button class="action-btn" onclick="demoPosition()">Position Examples</button>
+                <button class="action-btn" onclick="demoZIndex()">Z-Index Stacking</button>
+                <button class="action-btn" onclick="demoFloat()">Float Layout</button>
+                <button class="action-btn" onclick="clearDemo()">Reset</button>
+
+                <div class="demo-output" id="playground" style="margin-top: 20px; min-height: 250px;">
+                    <p style="text-align: center; padding: 80px;">Click buttons above to see examples!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 Common Use Cases</h2>
+
+            <div class="demo-box">
+                <strong>1. Fixed Navigation Bar:</strong>
+                <div class="code-block">
+<span class="css-selector">.navbar</span> {
+    <span class="css-property">position</span>: <span class="css-value">fixed</span>;
+    <span class="css-property">top</span>: <span class="css-value">0</span>;
+    <span class="css-property">left</span>: <span class="css-value">0</span>;
+    <span class="css-property">width</span>: <span class="css-value">100%</span>;
+    <span class="css-property">background</span>: <span class="css-value">white</span>;
+    <span class="css-property">z-index</span>: <span class="css-value">1000</span>;
+    <span class="css-property">box-shadow</span>: <span class="css-value">0 2px 5px rgba(0,0,0,0.1)</span>;
+}
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <strong>2. Modal Overlay:</strong>
+                <div class="code-block">
+<span class="css-selector">.modal-overlay</span> {
+    <span class="css-property">position</span>: <span class="css-value">fixed</span>;
+    <span class="css-property">top</span>: <span class="css-value">0</span>;
+    <span class="css-property">left</span>: <span class="css-value">0</span>;
+    <span class="css-property">width</span>: <span class="css-value">100%</span>;
+    <span class="css-property">height</span>: <span class="css-value">100%</span>;
+    <span class="css-property">background</span>: <span class="css-value">rgba(0, 0, 0, 0.5)</span>;
+    <span class="css-property">z-index</span>: <span class="css-value">9999</span>;
+}
+
+<span class="css-selector">.modal-content</span> {
+    <span class="css-property">position</span>: <span class="css-value">absolute</span>;
+    <span class="css-property">top</span>: <span class="css-value">50%</span>;
+    <span class="css-property">left</span>: <span class="css-value">50%</span>;
+    <span class="css-property">transform</span>: <span class="css-value">translate(-50%, -50%)</span>;
+}
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <strong>3. Badge on Icon:</strong>
+                <div class="code-block">
+<span class="css-selector">.icon-container</span> {
+    <span class="css-property">position</span>: <span class="css-value">relative</span>;
+    <span class="css-property">display</span>: <span class="css-value">inline-block</span>;
+}
+
+<span class="css-selector">.badge</span> {
+    <span class="css-property">position</span>: <span class="css-value">absolute</span>;
+    <span class="css-property">top</span>: <span class="css-value">-5px</span>;
+    <span class="css-property">right</span>: <span class="css-value">-5px</span>;
+    <span class="css-property">background</span>: <span class="css-value">red</span>;
+    <span class="css-property">border-radius</span>: <span class="css-value">50%</span>;
+    <span class="css-property">padding</span>: <span class="css-value">5px 8px</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="position: relative; display: inline-block; width: 60px; height: 60px; background: #3498db; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                        🔔
+                        <div style="position: absolute; top: -5px; right: -5px; background: #e74c3c; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">
+                            5
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <strong>4. Card Layout with Inline-Block:</strong>
+                <div class="code-block">
+<span class="css-selector">.card</span> {
+    <span class="css-property">display</span>: <span class="css-value">inline-block</span>;
+    <span class="css-property">width</span>: <span class="css-value">200px</span>;
+    <span class="css-property">margin</span>: <span class="css-value">10px</span>;
+    <span class="css-property">vertical-align</span>: <span class="css-value">top</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="display: inline-block; width: 180px; margin: 10px; vertical-align: top; background: #f8f9fa; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="width: 100%; height: 100px; background: #3498db; border-radius: 8px; margin-bottom: 15px;"></div>
+                        <h4 style="color: #333;">Card 1</h4>
+                        <p style="color: #666; font-size: 0.9em;">Content here</p>
+                    </div>
+                    <div style="display: inline-block; width: 180px; margin: 10px; vertical-align: top; background: #f8f9fa; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="width: 100%; height: 100px; background: #e74c3c; border-radius: 8px; margin-bottom: 15px;"></div>
+                        <h4 style="color: #333;">Card 2</h4>
+                        <p style="color: #666; font-size: 0.9em;">Content here</p>
+                    </div>
+                    <div style="display: inline-block; width: 180px; margin: 10px; vertical-align: top; background: #f8f9fa; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="width: 100%; height: 100px; background: #2ecc71; border-radius: 8px; margin-bottom: 15px;"></div>
+                        <h4 style="color: #333;">Card 3</h4>
+                        <p style="color: #666; font-size: 0.9em;">Content here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📝 Quick Reference</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; border-left: 5px solid #3498db;">
+                    <h4 style="color: #3498db; margin-bottom: 10px;">Display</h4>
+                    <code style="font-size: 0.85em;">
+                        block - Full width<br>
+                        inline - Inline flow<br>
+                        inline-block - Best of both<br>
+                        none - Hidden
+                    </code>
+                </div>
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2ecc71;">
+                    <h4 style="color: #2ecc71; margin-bottom: 10px;">Position</h4>
+                    <code style="font-size: 0.85em;">
+                        static - Default<br>
+                        relative - Relative to self<br>
+                        absolute - Relative to parent<br>
+                        fixed - Relative to viewport<br>
+                        sticky - Hybrid
+                    </code>
+                </div>
+                <div style="background: #fff3e0; padding: 20px; border-radius: 10px; border-left: 5px solid #f39c12;">
+                    <h4 style="color: #f39c12; margin-bottom: 10px;">Z-Index</h4>
+                    <code style="font-size: 0.85em;">
+                        z-index: 1; - Lower<br>
+                        z-index: 10; - Middle<br>
+                        z-index: 100; - Higher<br>
+                        z-index: 9999; - Modal
+                    </code>
+                </div>
+                <div style="background: #fce4ec; padding: 20px; border-radius: 10px; border-left: 5px solid #e91e63;">
+                    <h4 style="color: #e91e63; margin-bottom: 10px;">Float</h4>
+                    <code style="font-size: 0.85em;">
+                        float: left;<br>
+                        float: right;<br>
+                        clear: both;<br>
+                        (Use Flexbox instead!)
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>⚠️ Common Mistakes & Tips</h2>
+            <div class="highlight-box">
+                <strong>❌ Common Mistakes:</strong><br><br>
+                
+                <strong>1. Using width/height on inline elements:</strong><br>
+                They won't work! Use <code>display: inline-block</code> instead.<br><br>
+                
+                <strong>2. Forgetting position: relative on parent:</strong><br>
+                Absolute positioned children need a positioned parent.<br><br>
+                
+                <strong>3. Z-index not working:</strong><br>
+                Remember: z-index only works on positioned elements (not static).<br><br>
+                
+                <strong>4. Float layout issues:</strong><br>
+                Don't forget to clear floats or use modern Flexbox/Grid instead.<br><br>
+                
+                <strong>5. Fixed positioning covering content:</strong><br>
+                Add padding-top to body equal to fixed header height.
+            </div>
+
+            <div class="info-box">
+                <strong>✅ Best Practices:</strong><br><br>
+                
+                • Use Flexbox/Grid for layouts instead of floats<br>
+                • Use <code>position: relative</code> as parent for absolute children<br>
+                • Keep z-index values organized (100s, 1000s for different layers)<br>
+                • Use <code>display: inline-block</code> for inline elements that need dimensions<br>
+                • Test fixed/sticky elements on different screen sizes<br>
+                • Use semantic HTML with proper display values<br>
+                • Remember: absolute/fixed elements are removed from flow
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🎯 Key Takeaways</h2>
+            <div class="info-box">
+                <strong>Display Property:</strong><br>
+                ✅ <strong>block</strong> - Full width, new line, respects dimensions<br>
+                ✅ <strong>inline</strong> - Inline flow, ignores width/height<br>
+                ✅ <strong>inline-block</strong> - Inline but respects dimensions<br>
+                ✅ <strong>none</strong> - Hidden, takes no space<br><br>
+                
+                <strong>Position Property:</strong><br>
+                ✅ <strong>static</strong> - Default, normal flow<br>
+                ✅ <strong>relative</strong> - Offset from normal position<br>
+                ✅ <strong>absolute</strong> - Positioned relative to parent<br>
+                ✅ <strong>fixed</strong> - Fixed to viewport<br>
+                ✅ <strong>sticky</strong> - Relative until threshold, then fixed<br><br>
+                
+                <strong>Other Important Properties:</strong><br>
+                ✅ <strong>z-index</strong> - Controls stacking order<br>
+                ✅ <strong>float</strong> - Legacy layout (use Flexbox/Grid now)<br>
+                ✅ <strong>clear</strong> - Prevents wrapping around floats
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div class="nav-group">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="lesson10.html" class="nav-btn">⬅️ Previous: Box Model</a>
+            </div>
+            <div class="nav-group">
+                <a href="lesson12.html" class="nav-btn">➡️ Next: Flexbox Layout</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function demoDisplay() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Display Property Examples</h3>
+                
+                <h4 style="margin: 20px 0 10px 0;">display: block</h4>
+                <div style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
+                    <div style="display: block; background: #3498db; color: white; padding: 15px; margin: 5px 0; border-radius: 5px; width: 200px;">
+                        Block 1 (200px wide)
+                    </div>
+                    <div style="display: block; background: #e74c3c; color: white; padding: 15px; margin: 5px 0; border-radius: 5px; width: 300px;">
+                        Block 2 (300px wide)
+                    </div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">display: inline</h4>
+                <div style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
+                    <span style="display: inline; background: #3498db; color: white; padding: 10px; border-radius: 3px;">Inline 1</span>
+                    <span style="display: inline; background: #e74c3c; color: white; padding: 10px; border-radius: 3px;">Inline 2</span>
+                    <span style="display: inline; background: #2ecc71; color: white; padding: 10px; border-radius: 3px;">Inline 3</span>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">display: inline-block</h4>
+                <div style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
+                    <div style="display: inline-block; width: 100px; height: 80px; background: #3498db; color: white; margin: 5px; border-radius: 5px; text-align: center; padding-top: 30px;">
+                        Box 1
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 80px; background: #e74c3c; color: white; margin: 5px; border-radius: 5px; text-align: center; padding-top: 30px;">
+                        Box 2
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 80px; background: #2ecc71; color: white; margin: 5px; border-radius: 5px; text-align: center; padding-top: 30px;">
+                        Box 3
+                    </div>
+                </div>
+            `;
+        }
+
+        function demoPosition() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Position Examples</h3>
+                
+                <h4 style="margin-bottom: 10px;">position: relative</h4>
+                <div style="background: #ecf0f1; padding: 30px; border-radius: 10px; margin-bottom: 20px;">
+                    <div style="display: inline-block; width: 80px; height: 80px; background: #95a5a6; color: white; text-align: center; line-height: 80px; border-radius: 5px; margin: 5px;">
+                        Box 1
+                    </div>
+                    <div style="display: inline-block; width: 80px; height: 80px; background: #3498db; color: white; text-align: center; line-height: 80px; border-radius: 5px; margin: 5px; position: relative; top: 15px; left: 20px;">
+                        Relative
+                    </div>
+                    <div style="display: inline-block; width: 80px; height: 80px; background: #95a5a6; color: white; text-align: center; line-height: 80px; border-radius: 5px; margin: 5px;">
+                        Box 3
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 10px;">position: absolute</h4>
+                <div style="position: relative; background: #ecf0f1; padding: 40px; border-radius: 10px; min-height: 200px;">
+                    <div style="background: #95a5a6; color: white; padding: 15px; border-radius: 5px;">
+                        Parent (position: relative)
+                    </div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; padding: 15px; border-radius: 5px; font-weight: bold;">
+                        Absolute<br>top-right
+                    </div>
+                    <div style="position: absolute; bottom: 10px; left: 10px; background: #2ecc71; color: white; padding: 15px; border-radius: 5px; font-weight: bold;">
+                        Absolute<br>bottom-left
+                    </div>
+                </div>
+            `;
+        }
+
+        function demoZIndex() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Z-Index Stacking Demo</h3>
+                <div style="position: relative; height: 280px; background: #ecf0f1; border-radius: 10px; padding: 20px;">
+                    <div style="position: absolute; top: 30px; left: 30px; width: 140px; height: 140px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 1; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        z-index: 1<br>(Bottom)
+                    </div>
+                    <div style="position: absolute; top: 70px; left: 70px; width: 140px; height: 140px; background: #e74c3c; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 2; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        z-index: 2<br>(Middle)
+                    </div>
+                    <div style="position: absolute; top: 110px; left: 110px; width: 140px; height: 140px; background: #2ecc71; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 3; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        z-index: 3<br>(Top)
+                    </div>
+                </div>
+                <p style="margin-top: 15px; text-align: center; color: #666;">
+                    Higher z-index values appear on top!
+                </p>
+            `;
+        }
+
+        function demoFloat() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Float Layout Example</h3>
+                <div style="background: #ecf0f1; padding: 20px; border-radius: 10px;">
+                    <div style="float: left; width: 120px; height: 120px; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 20px 10px 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Float Left
+                    </div>
+                    <p style="text-align: justify; line-height: 1.8;">
+                        This text wraps around the floated element. The float property was commonly used for layouts 
+                        before Flexbox and Grid were introduced. Now it's mainly used for its original purpose: 
+                        wrapping text around images. Modern CSS provides much better tools for creating layouts, 
+                        such as Flexbox for one-dimensional layouts and Grid for two-dimensional layouts.
+                    </p>
+                    <div style="clear: both;"></div>
+                </div>
+                <p style="margin-top: 15px; text-align: center; color: #666;">
+                    💡 Use Flexbox or Grid for modern layouts!
+                </p>
+            `;
+        }
+
+        function clearDemo() {
+            document.getElementById('playground').innerHTML = '<p style="text-align: center; padding: 80px;">Click buttons above to see examples!</p>';
+        }
+    </script>
+</body>
+</html></td>
+                        <td>Hidden, takes no space</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>flex</code></td>
+                        <td>Flexible box layout</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>grid</code></td>
+                        <td>Grid layout</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-card">
+            <h3>1️⃣ display: block</h3>
+            <div class="demo-box">
+                <p><strong>Block elements:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Take up the full width available</li>
+                    <li>Start on a new line</li>
+                    <li>Stack vertically</li>
+                    <li>Respect width, height, margin, padding</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.block-element</span> {
+    <span class="css-property">display</span>: <span class="css-value">block</span>;
+    <span class="css-property">width</span>: <span class="css-value">200px</span>;
+    <span class="css-property">height</span>: <span class="css-value">50px</span>;
+    <span class="css-property">background</span>: <span class="css-value">#3498db</span>;
+    <span class="css-property">margin</span>: <span class="css-value">10px 0</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="display: block; width: 200px; height: 50px; background: #3498db; color: white; margin: 10px 0; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                        Block 1
+                    </div>
+                    <div style="display: block; width: 300px; height: 50px; background: #e74c3c; color: white; margin: 10px 0; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                        Block 2 (wider)
+                    </div>
+                    <div style="display: block; width: 150px; height: 50px; background: #2ecc71; color: white; margin: 10px 0; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                        Block 3
+                    </div>
+                </div>
+            </div>
+
+            <h3>2️⃣ display: inline</h3>
+            <div class="demo-box">
+                <p><strong>Inline elements:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Take only the width they need</li>
+                    <li>Stay on the same line with other inline elements</li>
+                    <li>Do NOT respect width/height properties</li>
+                    <li>Only respect horizontal margin/padding</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.inline-element</span> {
+    <span class="css-property">display</span>: <span class="css-value">inline</span>;
+    <span class="css-property">background</span>: <span class="css-value">#3498db</span>;
+    <span class="css-property">padding</span>: <span class="css-value">5px 10px</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <p>
+                        This is a paragraph with 
+                        <span style="display: inline; background: #3498db; color: white; padding: 5px 10px; border-radius: 3px;">inline element 1</span>
+                        and 
+                        <span style="display: inline; background: #e74c3c; color: white; padding: 5px 10px; border-radius: 3px;">inline element 2</span>
+                        and 
+                        <span style="display: inline; background: #2ecc71; color: white; padding: 5px 10px; border-radius: 3px;">inline element 3</span>
+                        all on the same line.
+                    </p>
+                </div>
+            </div>
+
+            <h3>3️⃣ display: inline-block</h3>
+            <div class="demo-box">
+                <p><strong>Inline-block elements (best of both worlds!):</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Flow inline like inline elements</li>
+                    <li>But respect width, height, margin, padding like block elements</li>
+                    <li>Perfect for horizontal layouts</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.inline-block-element</span> {
+    <span class="css-property">display</span>: <span class="css-value">inline-block</span>;
+    <span class="css-property">width</span>: <span class="css-value">100px</span>;
+    <span class="css-property">height</span>: <span class="css-value">100px</span>;
+    <span class="css-property">background</span>: <span class="css-value">#3498db</span>;
+    <span class="css-property">margin</span>: <span class="css-value">10px</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="display: inline-block; width: 100px; height: 100px; background: #3498db; color: white; margin: 10px; border-radius: 5px; text-align: center; line-height: 100px;">
+                        Box 1
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 100px; background: #e74c3c; color: white; margin: 10px; border-radius: 5px; text-align: center; line-height: 100px;">
+                        Box 2
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 100px; background: #2ecc71; color: white; margin: 10px; border-radius: 5px; text-align: center; line-height: 100px;">
+                        Box 3
+                    </div>
+                </div>
+            </div>
+
+            <h3>4️⃣ display: none</h3>
+            <div class="demo-box">
+                <p><strong>Hide elements completely:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Element is hidden</li>
+                    <li>Takes up NO space in the layout</li>
+                    <li>Different from <code>visibility: hidden</code> (which keeps space)</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.hidden</span> {
+    <span class="css-property">display</span>: <span class="css-value">none</span>;  <span class="comment">/* Completely removed from layout */</span>
+}
+
+<span class="css-selector">.invisible</span> {
+    <span class="css-property">visibility</span>: <span class="css-value">hidden</span>;  <span class="comment">/* Hidden but keeps space */</span>
+}
+                </div>
+                <div class="demo-output">
+                    <div style="padding: 15px; background: #3498db; color: white; margin: 5px 0; border-radius: 5px;">Box 1 (visible)</div>
+                    <div style="padding: 15px; background: #e74c3c; color: white; margin: 5px 0; border-radius: 5px; display: none;">Box 2 (display: none) - You can't see me!</div>
+                    <div style="padding: 15px; background: #2ecc71; color: white; margin: 5px 0; border-radius: 5px;">Box 3 (visible) - Notice Box 2 takes no space</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POSITION PROPERTY SECTION -->
+        <div class="content-card">
+            <h2>📍 The Position Property</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                The <code>position</code> property specifies the positioning method for an element. 
+                It works with the properties: <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>.
+            </p>
+
+            <table class="property-table">
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Behavior</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>static</code></td>
+                        <td>Default - normal document flow</td>
+                        <td>Default positioning</td>
+                    </tr>
+                    <tr>
+                        <td><code>relative</code></td>
+                        <td>Positioned relative to itself</td>
+                        <td>Small adjustments, parent for absolute</td>
+                    </tr>
+                    <tr>
+                        <td><code>absolute</code></td>
+                        <td>Positioned relative to positioned parent</td>
+                        <td>Overlays, tooltips, dropdowns</td>
+                    </tr>
+                    <tr>
+                        <td><code>fixed</code></td>
+                        <td>Positioned relative to viewport</td>
+                        <td>Fixed headers, back-to-top buttons</td>
+                    </tr>
+                    <tr>
+                        <td><code>sticky</code></td>
+                        <td>Hybrid of relative and fixed</td>
+                        <td>Sticky navigation bars</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-card">
+            <h3>1️⃣ position: static (Default)</h3>
+            <div class="demo-box">
+                <p>Elements are positioned according to normal document flow. <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> have NO effect.</p>
+                <div class="code-block">
+<span class="css-selector">.static-box</span> {
+    <span class="css-property">position</span>: <span class="css-value">static</span>;  <span class="comment">/* Default value */</span>
+}
+                </div>
+            </div>
+
+            <h3>2️⃣ position: relative</h3>
+            <div class="demo-box">
+                <p><strong>Positioned relative to its normal position:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Element stays in normal flow</li>
+                    <li>Can be offset using top, right, bottom, left</li>
+                    <li>Original space is preserved</li>
+                    <li>Often used as parent for absolute positioned children</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.relative-box</span> {
+    <span class="css-property">position</span>: <span class="css-value">relative</span>;
+    <span class="css-property">top</span>: <span class="css-value">20px</span>;     <span class="comment">/* Moved down 20px */</span>
+    <span class="css-property">left</span>: <span class="css-value">30px</span>;    <span class="comment">/* Moved right 30px */</span>
+}
+                </div>
+                <div class="demo-output" style="background: #ecf0f1; padding: 20px;">
+                    <div style="display: inline-block; width: 100px; height: 100px; background: #95a5a6; color: white; text-align: center; line-height: 100px; border-radius: 5px; margin: 10px;">
+                        Box 1
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 100px; background: #3498db; color: white; text-align: center; line-height: 100px; border-radius: 5px; margin: 10px; position: relative; top: 20px; left: 30px;">
+                        Box 2<br><small>(relative)</small>
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 100px; background: #95a5a6; color: white; text-align: center; line-height: 100px; border-radius: 5px; margin: 10px;">
+                        Box 3
+                    </div>
+                </div>
+                <p style="margin-top: 10px; color: #666;">Notice: Box 2 is moved, but its original space is preserved</p>
+            </div>
+
+            <h3>3️⃣ position: absolute</h3>
+            <div class="demo-box">
+                <p><strong>Positioned relative to nearest positioned ancestor:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Removed from normal document flow</li>
+                    <li>Other elements act like it doesn't exist</li>
+                    <li>Positioned relative to nearest parent with position (not static)</li>
+                    <li>If no positioned parent, uses the document body</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.parent</span> {
+    <span class="css-property">position</span>: <span class="css-value">relative</span>;  <span class="comment">/* Creates positioning context */</span>
+}
+
+<span class="css-selector">.absolute-child</span> {
+    <span class="css-property">position</span>: <span class="css-value">absolute</span>;
+    <span class="css-property">top</span>: <span class="css-value">10px</span>;
+    <span class="css-property">right</span>: <span class="css-value">10px</span>;
+}
+                </div>
+                <div class="demo-output">
+                    <div style="position: relative; background: #ecf0f1; padding: 60px 20px; border-radius: 10px; min-height: 200px;">
+                        <div style="background: #95a5a6; color: white; padding: 15px; border-radius: 5px;">
+                            Parent Container (position: relative)
+                        </div>
+                        <div style="position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; padding: 15px; border-radius: 5px; font-weight: bold;">
+                            Absolute<br>top: 10px<br>right: 10px
+                        </div>
+                        <div style="position: absolute; bottom: 10px; left: 10px; background: #3498db; color: white; padding: 15px; border-radius: 5px; font-weight: bold;">
+                            Absolute<br>bottom: 10px<br>left: 10px
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>4️⃣ position: fixed</h3>
+            <div class="demo-box">
+                <p><strong>Positioned relative to the viewport (browser window):</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Stays in same position even when scrolling</li>
+                    <li>Removed from normal flow</li>
+                    <li>Perfect for navigation bars, floating buttons</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.fixed-header</span> {
+    <span class="css-property">position</span>: <span class="css-value">fixed</span>;
+    <span class="css-property">top</span>: <span class="css-value">0</span>;
+    <span class="css-property">left</span>: <span class="css-value">0</span>;
+    <span class="css-property">width</span>: <span class="css-value">100%</span>;
+    <span class="css-property">z-index</span>: <span class="css-value">1000</span>;
+}
+                </div>
+                <div class="info-box">
+                    <strong>💡 Common Uses:</strong><br>
+                    • Fixed navigation bars at top<br>
+                    • Floating "Back to Top" buttons<br>
+                    • Chat widgets<br>
+                    • Cookie consent banners
+                </div>
+            </div>
+
+            <h3>5️⃣ position: sticky</h3>
+            <div class="demo-box">
+                <p><strong>Hybrid between relative and fixed:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Acts like relative until scroll threshold</li>
+                    <li>Then becomes fixed at specified position</li>
+                    <li>Great for section headers</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.sticky-header</span> {
+    <span class="css-property">position</span>: <span class="css-value">sticky</span>;
+    <span class="css-property">top</span>: <span class="css-value">0</span>;  <span class="comment">/* Sticks when reaching top */</span>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>📚 z-index Property</h2>
+            <p style="margin-bottom: 20px;">
+                The <code>z-index</code> property controls the stacking order of positioned elements. 
+                Higher values appear on top of lower values.
+            </p>
+
+            <div class="demo-box">
+                <p><strong>Important points:</strong></p>
+                <ul style="margin-left: 20px; line-height: 2; margin-bottom: 20px;">
+                    <li>Only works on positioned elements (not static)</li>
+                    <li>Higher z-index = closer to viewer</li>
+                    <li>Can be negative</li>
+                    <li>Default is auto (0)</li>
+                </ul>
+                <div class="code-block">
+<span class="css-selector">.bottom</span> {
+    <span class="css-property">position</span>: <span class="css-value">relative</span>;
+    <span class="css-property">z-index</span>: <span class="css-value">1</span>;
+}
+
+<span class="css-selector">.middle</span> {
+    <span class="css-property">position</span>: <span class="css-value">relative</span>;
+    <span class="css-property">z-index</span>: <span class="css-value">2</span>;
+}
+
+<span class="css-selector">.top</span> {
+    <span class="css-property">position</span>: <span class="css-value">relative</span>;
+    <span class="css-property">z-index</span>: <span class="css-value">3</span>;
+}
+                </div>
+                <div class="demo-output" style="position: relative; height: 250px; background: #ecf0f1;">
+                    <div style="position: absolute; top: 20px; left: 20px; width: 150px; height: 150px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 1; font-weight: bold;">
+                        z-index: 1
+                    </div>
+                    <div style="position: absolute; top: 60px; left: 60px; width: 150px; height: 150px; background: #e74c3c; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 2; font-weight: bold;">
+                        z-index: 2
+                    </div>
+                    <div style="position: absolute; top: 100px; left: 100px; width: 150px; height: 150px; background: #2ecc71; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 3; font-weight: bold;">
+                        z-index: 3
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>🌊 Float Property (Legacy Layout)</h2>
+            <p style="margin-bottom: 20px;">
+                The <code>float</code> property was originally for wrapping text around images, but was heavily used for layouts 
+                before Flexbox and Grid. Now mainly used for its original purpose.
+            </p>
+
+            <table class="property-table">
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>left</code></td>
+                        <td>Element floats to the left</td>
+                    </tr>
+                    <tr>
+                        <td><code>right</code></td>
+                        <td>Element floats to the right</td>
+                    </tr>
+                    <tr>
+                        <td><code>none</code>
+                                                <tr>
+                        <td><code>none</code></td>
+                        <td>Hidden, takes no space</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>flex</code></td>
+                        <td>Flexible box layout</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>grid</code></td>
+                        <td>Grid layout</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- More sections already present in your file -->
+        
+        <!-- The closing part that completes your file: -->
+    </div>
+
+    <script>
+        function demoDisplay() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Display Property Examples</h3>
+                
+                <h4 style="margin: 20px 0 10px 0;">display: block</h4>
+                <div style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
+                    <div style="display: block; background: #3498db; color: white; padding: 15px; margin: 5px 0; border-radius: 5px; width: 200px;">
+                        Block 1 (200px wide)
+                    </div>
+                    <div style="display: block; background: #e74c3c; color: white; padding: 15px; margin: 5px 0; border-radius: 5px; width: 300px;">
+                        Block 2 (300px wide)
+                    </div>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">display: inline</h4>
+                <div style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
+                    <span style="display: inline; background: #3498db; color: white; padding: 10px; border-radius: 3px;">Inline 1</span>
+                    <span style="display: inline; background: #e74c3c; color: white; padding: 10px; border-radius: 3px;">Inline 2</span>
+                    <span style="display: inline; background: #2ecc71; color: white; padding: 10px; border-radius: 3px;">Inline 3</span>
+                </div>
+
+                <h4 style="margin: 20px 0 10px 0;">display: inline-block</h4>
+                <div style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
+                    <div style="display: inline-block; width: 100px; height: 80px; background: #3498db; color: white; margin: 5px; border-radius: 5px; text-align: center; padding-top: 30px;">
+                        Box 1
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 80px; background: #e74c3c; color: white; margin: 5px; border-radius: 5px; text-align: center; padding-top: 30px;">
+                        Box 2
+                    </div>
+                    <div style="display: inline-block; width: 100px; height: 80px; background: #2ecc71; color: white; margin: 5px; border-radius: 5px; text-align: center; padding-top: 30px;">
+                        Box 3
+                    </div>
+                </div>
+            `;
+        }
+
+        function demoPosition() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Position Examples</h3>
+                
+                <h4 style="margin-bottom: 10px;">position: relative</h4>
+                <div style="background: #ecf0f1; padding: 30px; border-radius: 10px; margin-bottom: 20px;">
+                    <div style="display: inline-block; width: 80px; height: 80px; background: #95a5a6; color: white; text-align: center; line-height: 80px; border-radius: 5px; margin: 5px;">
+                        Box 1
+                    </div>
+                    <div style="display: inline-block; width: 80px; height: 80px; background: #3498db; color: white; text-align: center; line-height: 80px; border-radius: 5px; margin: 5px; position: relative; top: 15px; left: 20px;">
+                        Relative
+                    </div>
+                    <div style="display: inline-block; width: 80px; height: 80px; background: #95a5a6; color: white; text-align: center; line-height: 80px; border-radius: 5px; margin: 5px;">
+                        Box 3
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 10px;">position: absolute</h4>
+                <div style="position: relative; background: #ecf0f1; padding: 40px; border-radius: 10px; min-height: 200px;">
+                    <div style="background: #95a5a6; color: white; padding: 15px; border-radius: 5px;">
+                        Parent (position: relative)
+                    </div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; padding: 15px; border-radius: 5px; font-weight: bold;">
+                        Absolute<br>top-right
+                    </div>
+                    <div style="position: absolute; bottom: 10px; left: 10px; background: #2ecc71; color: white; padding: 15px; border-radius: 5px; font-weight: bold;">
+                        Absolute<br>bottom-left
+                    </div>
+                </div>
+            `;
+        }
+
+        function demoZIndex() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Z-Index Stacking Demo</h3>
+                <div style="position: relative; height: 280px; background: #ecf0f1; border-radius: 10px; padding: 20px;">
+                    <div style="position: absolute; top: 30px; left: 30px; width: 140px; height: 140px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 1; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        z-index: 1<br>(Bottom)
+                    </div>
+                    <div style="position: absolute; top: 70px; left: 70px; width: 140px; height: 140px; background: #e74c3c; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 2; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        z-index: 2<br>(Middle)
+                    </div>
+                    <div style="position: absolute; top: 110px; left: 110px; width: 140px; height: 140px; background: #2ecc71; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; z-index: 3; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        z-index: 3<br>(Top)
+                    </div>
+                </div>
+                <p style="margin-top: 15px; text-align: center; color: #666;">
+                    Higher z-index values appear on top!
+                </p>
+            `;
+        }
+
+        function demoFloat() {
+            document.getElementById('playground').innerHTML = `
+                <h3 style="color: #11998e; margin-bottom: 20px;">Float Layout Example</h3>
+                <div style="background: #ecf0f1; padding: 20px; border-radius: 10px;">
+                    <div style="float: left; width: 120px; height: 120px; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 20px 10px 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                        Float Left
+                    </div>
+                    <p style="text-align: justify; line-height: 1.8;">
+                        This text wraps around the floated element. The float property was commonly used for layouts 
+                        before Flexbox and Grid were introduced. Now it's mainly used for its original purpose: 
+                        wrapping text around images. Modern CSS provides much better tools for creating layouts, 
+                        such as Flexbox for one-dimensional layouts and Grid for two-dimensional layouts.
+                    </p>
+                    <div style="clear: both;"></div>
+                </div>
+                <p style="margin-top: 15px; text-align: center; color: #666;">
+                    💡 Use Flexbox or Grid for modern layouts!
+                </p>
+            `;
+        }
+
+        function clearDemo() {
+            document.getElementById('playground').innerHTML = '<p style="text-align: center; padding: 80px;">Click buttons above to see examples!</p>';
+        }
+    </script>
+</body>
+</html>
